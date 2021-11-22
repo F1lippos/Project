@@ -8,9 +8,6 @@ nrow(df2)
 head(df3$learner_id)
 nrow(df3)
 
-
-
-
 library(dplyr)
 glimpse(df2)
 glimpse(df3)
@@ -101,7 +98,8 @@ ggplot(data=data) + geom_point(aes(x=format(data$enrolled_at, format = "%Y"), y=
 
 ggplot(data=data) + geom_point(aes(x=age_range, y=gender,colour=age_range))
 
-##grpah of age_range vs highest_education_level
+
+##graph of age_range vs highest_education_level
 dfageeducation <- data %>%
 count(age= data$age_range,education=data$highest_education_level, sort = TRUE) 
 
@@ -113,11 +111,10 @@ ggplot(data=dfageeducation) + geom_point(aes(x=age , y=education  ,colour=age, s
 
 ##ggplot(data=data) + geom_point(aes(x=age_range , y=highest_education_level  ,colour=age_range ))
 
-## 5  graph of gender vs highest_education_level
-dfageeducation <- data %>%
+##Education per age by gender
+dfageeducation1 <- data %>%
   count(gender= data$gender,education=data$highest_education_level, sort = TRUE) 
-
-ggplot(data=dfageeducation) + geom_point(aes(x=gender , y=education  ,colour=gender, size = 4 ))+
+ggplot(data=dfageeducation1) + geom_point(aes(x=gender , y=education  ,colour=gender, size = 4 ))+
   geom_text(aes(x=gender,label = n,y=education), size = 3)+
   labs(title = "Education Per Age",
        x = "Gender",
@@ -145,7 +142,6 @@ ggplot(data=dfQuestionresp4) + geom_point(aes(x=week  , y=n  ,colour=result, siz
        y = "Results")
 
 ###Multiple_Choice Results
-
 table(Questionresp4$quiz_question,Questionresp4$question_number)
 
 dfQuestionresp4 <- Questionresp4 %>%
@@ -186,7 +182,6 @@ format(data$enrolled_at, format = "%Y")
  ## plot(table (activity$step, activity$learner_id                             ))
  
  
-
  ###############################################################################
  #############################   4 week ########################################
  ###############################################################################
@@ -209,8 +204,8 @@ format(data$enrolled_at, format = "%Y")
  
  ###  1 graph  regarding th ereason why they leaving the course 
  
- table (leaving4$leaving_reason   )
- table (leaving4$leaving_reason ,  )
+ #table (leaving4$leaving_reason   )
+ #table (leaving4$leaving_reason ,  )
  
  dfleavingReason  <- leaving4 %>%
    count(LeftYear=  format(as.POSIXct(as.Date(leaving4$left_at ),format = "%m/%d/%Y %H:%M:%S") , format = "%Y")  , reason =leaving4$leaving_reason , sort = TRUE)
@@ -264,6 +259,9 @@ format(data$enrolled_at, format = "%Y")
         x = "Steps",
         y = "Number of trials")
  
+ 
+ 
+ 
  ###############################
  ##more investigation
  cyber.security.4.enrolments  [ cyber.security.4.enrolments$learner_id  == "091df104-705f-4ee2-a67b-9d90043c4f56",]
@@ -274,7 +272,6 @@ format(data$enrolled_at, format = "%Y")
  
  
  cyber.security.4.weekly.sentiment.survey.responses  [ cyber.security.4.weekly.sentiment.survey.responses$learner_id  == "091df104-705f-4ee2-a67b-9d90043c4f56",]
- 
  
  
  
