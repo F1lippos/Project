@@ -1,0 +1,98 @@
+---
+title: "Roject"
+author: "Filippos Ppikrides"
+date: "11/14/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+# Knitr setup
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir= normalizePath('..'))
+```
+
+```{r include=FALSE}
+# Load project
+library("ProjectTemplate")
+setwd("~/R/CSCFilProject")
+load.project()
+
+# Run code in analysis.R script
+source("src/Analysis.R")
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+ggplot(data=data) + geom_point(aes(x=age_range, y=gender,colour=age_range))
+```
+
+## R New grapg
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+```{r}
+ggplot(data=data) + geom_point(aes(x=age_range, y=highest_education_level,colour=age_range))
+```
+  
+##report 1
+This graph shows the enrollments regarding the age and the gender of the enrollment people.Inside of each bar on the graph there are the numbers of each age regarding the gender.On the y axis there are the number of the Occurrences which shows the maximum number of each age.The red color is  for female and the green for male.Also there is the blue color for non-binary and the gray for NA.At the age 18-25 and 26-35 as the graph shows are the highest enrollments. On the age 46-55 there is one non-binary which is not specify the gender. If you looked focus on the graph you can see that the females are more than males on every enrollment regarding on any age.
+
+**Note:According to the ggplot geom_bar unfortunately the visualize of showing the color percentage of each bar based on gender on the age range is not match with the number's for the genders. But the number's of each gender are correct.     
+
+```{r}
+##Enrolments regarding age/gender
+ggplot(dfg ,aes(x = age, y = n   , fill = gender))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label = n,y=n), size = 3) +
+  labs(title = "Enrolments regarding age/gender",
+       x = "Age-Range",
+       y = "Number of Ocurances")
+```
+
+##report 2
+On this graph there are two years of enrollments. The years 2016 and 2017. The y axis shows the Number of Enrollments by hundred and the x axis shows the Years.The difference between of the enrollments of the years are high. In 2016 were only 26 and in 2017 were 318.  
+
+```{r}
+##Enrolments By Year
+ggplot(dfinserttions ,aes(x = Enrolemts, y = n   , fill = Enrolemts   ))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label = n,y=n), size = 3) +
+  labs(title = "Enrolments By Year",
+       x = "Year",
+       y = "Number of Enrolments")
+```
+
+## report 3
+This graph shows about the education per age. The y axis shows the education level and the x axis shows the age range.Inside of every circle there is a number which is the count of the people based on the age and for the highest education level.Each age range has different color circle. The age with the highest count of people in university degree and university masters is the age 26-35.Based on university degree the age 18-25 is the second highest with the count of people 35. The age >65 has the highest count of people in university doctorate and professional. The age <18 has the lowest count of people in university degree and in secondary which is normal at this age.
+
+```{r}
+##graph of age vs highest_education_level
+dfageeducation <- data %>%
+count(age= data$age_range,education=data$highest_education_level, sort = TRUE) 
+ggplot(data=dfageeducation) + geom_point(aes(x=age , y=education  ,colour=age, size = 4 ))+
+  geom_text(aes(x=age,label = n,y=education), size = 3)+
+  labs(title = "Education Per Age",
+       x = "Age-Range",
+       y = "Highest Education Level")
+```
+
+## report 4
+According to this graph shows on y axis the highest education level and on x axis shows the gender. The number inside the circles is the count of people. Based on this graph the highest education level is the university degree which has 61 count of people who are female and 84 count of people who are male. The second highest education level is the university degree with count 20 who are female and 41 who are male.The third highest education level is the secondary with count 23 who are female and 29 who are male. The lowest highest education level is the apprenticeship with count 2 who are female and 1 who are male. The last there is only one person on university masters who is non-binary.
+
+```{r}
+##Education per age by gender
+dfageeducation1 <- data %>%
+count(gender= data$gender,education=data$highest_education_level, sort = TRUE) 
+ggplot(data=dfageeducation1) + geom_point(aes(x=gender , y=education  ,colour=gender, size = 4 ))+
+  geom_text(aes(x=gender,label = n,y=education), size = 3)+
+  labs(title = "Education Per Age",
+       x = "Gender",
+       y = "highest_education_level")
+```
+
+
